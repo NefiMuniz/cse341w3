@@ -1,0 +1,63 @@
+// LOCALHOST
+// Missionaries
+### Get All
+GET http://localhost:3000/api/missionaries
+Content-Type: application/json
+
+### Get By ID
+GET http://localhost:3000/api/missionaries/67dcb89779dbdb481b384790
+
+### Create new
+POST http://localhost:3000/api/missionaries
+Content-Type: application/json
+
+{
+  "firstName": "Nefi",
+  "lastName": "Muniz",
+  "whatsapp": "+5577999999999",
+  "gender": "M",
+  "englishFluent": "Yes",
+  "missionStart": "2024-01-01",
+  "missionEnd": "2026-01-01"
+}
+
+### Update By ID
+PUT http://localhost:3000/api/missionaries/67dcb89779dbdb481b384790
+
+### Delete By ID
+DELETE http://localhost:3000/api/missionaries/67dcbabedfc5eeac20571983
+
+// Classes
+### Get all classes
+GET http://localhost:3000/api/classes
+Content-Type: application/json
+
+### Get a class by ID
+GET http://localhost:3000/api/classes/67dcbcb2a396990a3760d6a1
+Content-Type: application/json
+
+### Create a new class
+POST http://localhost:3000/api/classes
+Content-Type: application/json
+
+{
+  "class": "EC3",
+  "day": "tuesday",
+  "zoomLink": "https://zoom.us/j/123456789",
+  "zoomPass": "123456",
+  "assignedTo": "67dcbabedfc5eeac20571983"
+}
+
+### Update a class by ID
+PUT http://localhost:3000/api/classes/67dcbcb2a396990a3760d6a1
+Content-Type: application/json
+
+{
+  "day": "wednesday",
+  "zoomLink": "https://zoom.us/j/987654321",
+  "zoomPass": "654321"
+}
+
+### Delete a class by ID
+DELETE http://localhost:3000/api/classes/67dcbcb2a396990a3760d6a1
+Content-Type: application/json

@@ -1,0 +1,30 @@
+{
+  "name": "cse341w3",
+  "version": "1.0.0",
+  "description": "CSE341 Week 3",
+  "homepage": "https://github.com/NefiMuniz/cse341w3#readme",
+  "bugs": {
+    "url": "https://github.com/NefiMuniz/cse341w3/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NefiMuniz/cse341w3.git"
+  },
+  "license": "ISC",
+  "author": "Nefi Muniz",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
