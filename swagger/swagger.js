@@ -9,14 +9,15 @@ const swaggerOptions = {
       version: '1.0.0',
       description: 'API for managing missionaries and classes',
     },
-    servers: [{
-      url: `http://localhost:${process.env.PORT}`,
-      description: 'Local server',
-    },
-    {
-      url: 'https://project-2-iwcv.onrender.com',
-      description: 'Render server',
-    },
+    servers: [
+      {
+        url: 'https://project-2-iwcv.onrender.com',
+        description: 'Render server',
+      },
+      {
+        url: `http://localhost:${process.env.PORT}`,
+        description: 'Local server',
+      },
   ],
     components: {
       schemas: {
