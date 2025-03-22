@@ -18,6 +18,10 @@ const missionaryController = require('../controllers/missionaryController');
  *     responses:
  *       200:
  *         description: List of missionaries
+ *         content:
+ *           aplication/json:
+ *             schema:
+ *               $ref: "#components/schemas/MissionaryResponse"
  *       500:
  *         description: Server error
  */
