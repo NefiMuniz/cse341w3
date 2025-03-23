@@ -86,7 +86,7 @@ router.post('/', missionaryController.createMissionary);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Missionary'
+ *             $ref: '#/components/schemas/UpdateMissionary'
  *     responses:
  *       200:
  *         description: Missionary updated
