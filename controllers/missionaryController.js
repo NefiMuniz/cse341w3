@@ -34,6 +34,8 @@ const createMissionary = async (req, res) => {
 
 const updateMissionary = async (req, res) => {
   try {
+    delete red.body._id;
+
     const missionary = await Missionary.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -43,7 +45,11 @@ const updateMissionary = async (req, res) => {
     }
     res.status(200).json({ message: 'Missionary updated' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map((err) => err.message);
+      return res.status(400).json({ message: messages.join(', ') });
+    }
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 

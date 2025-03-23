@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const missionarySchema = new mongoose.Schema({
+  _id: { type: mongoose.Schema.Types.ObjectId, immutable: true },
   firstName: { type: String, required: true},
   lastName: { type: String, required: true},
   whatsapp: { type: String, required: true},

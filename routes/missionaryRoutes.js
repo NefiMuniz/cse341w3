@@ -90,10 +90,12 @@ router.post('/', missionaryController.createMissionary);
  *     responses:
  *       200:
  *         description: Missionary updated
+ *       400:
+ *         description: Invalid input or _id field provided (ignored)
  *       404:
  *         description: Missionary not found
- *       400:
- *         description: Invalid input
+ *       500:
+ *         description: Internal server error
  */
 router.put('/:id', missionaryController.updateMissionary);
 
