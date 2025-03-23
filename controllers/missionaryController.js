@@ -1,6 +1,6 @@
 const Missionary = require('../models/Missionary');
 const Class = require('../models/Class');
-const UpdateMissionary = require('../models/UpdateMissionary');
+// const UpdateMissionary = require('../models/UpdateMissionary');
 
 const getAllMissionaries = async (req, res) => {
   try {
@@ -35,8 +35,6 @@ const createMissionary = async (req, res) => {
 
 const updateMissionary = async (req, res) => {
   try {
-    const updateData = new UpdateMissionary(req.body);
-    await updateData.validate();
 
     const missionary = await Missionary.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -66,7 +64,7 @@ const deleteMissionary = async (req, res) => {
 
     const missionary = await Missionary.findByIdAndDelete(req.params.id);
     if (!missionary) {
-      return res.status(404).json({ message: 'Missionary not fount' });
+      return res.status(404).json({ message: 'Missionary not found' });
     }
     res.status(200).json({ message: 'Missionary deleted succesfully' })
   } catch (error) {

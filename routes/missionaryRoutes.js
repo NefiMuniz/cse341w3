@@ -60,7 +60,7 @@ router.get('/:id', missionaryController.getMissionaryById);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Missionary'
+ *             $ref: '#/components/schemas/UpdateMissionary'
  *     responses:
  *       201:
  *         description: Missionary created

@@ -6,7 +6,7 @@ const updateMissionarySchema = new mongoose.Schema({
   whatsapp: { type: String, required: true},
   gender: { type: String, enum: ['M', 'F'], required: true},
   pretitle: { type: String, default: function() {
-    return this.gender === 'M' ? 'Elder' : "Sister'";
+    return this.gender === 'M' ? 'Elder' : 'Sister';
   }},
   englishFluent: { type: String, enum: ['Yes', 'No'], required: true},
   missionStart: { type: Date, required: true},
