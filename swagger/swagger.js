@@ -21,13 +21,6 @@ const swaggerOptions = {
       },
   ],
     components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        }
-      },
       schemas: {
         Missionary: {
           type: 'object',
@@ -79,9 +72,6 @@ const swaggerOptions = {
         }
       },
     },
-    security: [{
-      bearerAuth: []
-    }]
   },
   apis: ['./routes/*.js'],
 };

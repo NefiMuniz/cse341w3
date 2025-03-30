@@ -1,6 +1,5 @@
 const Missionary = require('../models/Missionary');
 const Class = require('../models/Class');
-// const UpdateMissionary = require('../models/UpdateMissionary');
 
 const getAllMissionaries = async (req, res) => {
   try {
