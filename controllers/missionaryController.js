@@ -24,8 +24,11 @@ const getMissionaryById = async (req, res) => {
 };
 
 const createMissionary = async (req, res) => {
-  const missionary = new Missionary(req.body);
   try {
+  const { _id, ...data } = req.body;
+  const missionary = new Missionary(data);
+  
+  // const missionary = new Missionary(req.body);
     await missionary.save();
     res.status(201).json(missionary);
   } catch (error) {
@@ -35,8 +38,14 @@ const createMissionary = async (req, res) => {
 
 const updateMissionary = async (req, res) => {
   try {
+    const { _id, ...updateData } = req.body;
+    const { id } = req.params;
 
-    const missionary = await Missionary.findByIdAndUpdate(req.params.id, req.body, {
+    if (updateData.gender) {
+      updateData.pretitle = updateData.gender === 'M' ? 'Elder' : 'Sister';
+    }
+
+    const missionary = await Missionary.findByIdAndUpdate(id, updateData, {
       new: true,
       runValidators: true,
     });

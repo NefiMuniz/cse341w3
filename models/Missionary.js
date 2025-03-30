@@ -13,4 +13,17 @@ const missionarySchema = new mongoose.Schema({
   missionEnd: { type: Date, required: true},
 });
 
+missionarySchema.pre('save', function (next) {
+  this.pretitle = this.gender === 'M' ? 'Elder' : 'Sister';
+  next();
+});
+
+missionarySchema.pre('findOneAndUpdate', function (next) {
+  const update = this.getUpdate();
+  if (update.gender) {
+    update.pretitle = update.gender === 'M' ? 'Elder' : 'Sister';
+  }
+  next();
+});
+
 module.exports = mongoose.model('Missionary', missionarySchema);

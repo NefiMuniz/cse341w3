@@ -49,7 +49,7 @@ router.get('/:id', classController.getClassById);
  * @swagger
  * /api/classes:
  *   post:
- *     summary: Create a new class if there's at least one missionary available
+ *     summary: Create a new class if there's at least one missionary available (Requires authentication)
  *     tags: [Classes]
  *     requestBody:
  *       required: true
@@ -97,7 +97,7 @@ router.put('/:id', classController.updateClass);
  * @swagger
  * /api/classes/{id}:
  *   delete:
- *     summary: Delete a class by ID
+ *     summary: Delete a class by ID (Requires authentication)
  *     tags: [Classes]
  *     parameters:
  *       - in: path

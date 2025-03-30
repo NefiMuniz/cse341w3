@@ -53,7 +53,7 @@ router.get('/:id', missionaryController.getMissionaryById);
  * @swagger
  * /api/missionaries:
  *   post:
- *     summary: Create a new missionary
+ *     summary: Create a new missionary (Requires authentication)
  *     tags: [Missionaries]
  *     requestBody:
  *       required: true
@@ -103,7 +103,7 @@ router.put('/:id', missionaryController.updateMissionary);
  * @swagger
  * /api/missionaries/{id}:
  *   delete:
- *     summary: Delete a missionary by ID if he's not assigned to any class
+ *     summary: Delete a missionary by ID if he's not assigned to any class (Requires authentication)
  *     tags: [Missionaries]
  *     parameters:
  *       - in: path
