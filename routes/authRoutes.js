@@ -66,7 +66,7 @@ router.get('/github/callback',
  *               properties:
  *                 message:
  *                   type: string
- *                     example: Successfully logged out
+ *                   example: Successfully logged out
  *       500:
  *         description: Server error during logout
  */
