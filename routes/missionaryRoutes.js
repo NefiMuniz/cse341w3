@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const missionaryController = require('../controllers/missionaryController');
+const { ensureAuthenticated } = require('../middleware/auth');
 
 /**
  * @swagger
@@ -55,6 +56,8 @@ router.get('/:id', missionaryController.getMissionaryById);
  *   post:
  *     summary: Create a new missionary (Requires authentication)
  *     tags: [Missionaries]
+ *     secutiry:
+ *       - githubAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -66,15 +69,19 @@ router.get('/:id', missionaryController.getMissionaryById);
  *         description: Missionary created
  *       400:
  *         description: Invalid input
+ *       401:
+ *         description: unauthorized
  */
-router.post('/', missionaryController.createMissionary);
+router.post('/', ensureAuthenticated, missionaryController.createMissionary);
 
 /**
  * @swagger
  * /api/missionaries/{id}:
  *   put:
- *     summary: Update a missionary by ID
+ *     summary: Update a missionary by ID (Requires authentication)
  *     tags: [Missionaries]
+ *     secutiry:
+ *       - githubAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -92,12 +99,14 @@ router.post('/', missionaryController.createMissionary);
  *         description: Missionary updated
  *       400:
  *         description: Invalid input or _id field provided (ignored)
+ *       401:
+ *         description: Unauthorized
  *       404:
  *         description: Missionary not found
  *       500:
  *         description: Internal server error
  */
-router.put('/:id', missionaryController.updateMissionary);
+router.put('/:id', ensureAuthenticated, missionaryController.updateMissionary);
 
 /**
  * @swagger
@@ -105,6 +114,8 @@ router.put('/:id', missionaryController.updateMissionary);
  *   delete:
  *     summary: Delete a missionary by ID if he's not assigned to any class (Requires authentication)
  *     tags: [Missionaries]
+ *     secutiry:
+ *       - githubAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -116,11 +127,13 @@ router.put('/:id', missionaryController.updateMissionary);
  *         description: Missionary deleted
  *       400:
  *         description: Cannot delete an assigned missionary
+ *       401:
+ *         description: Unauthorized
  *       404:
  *         description: Missionary not found
  *       500:
  *         description: Server error
  */
-router.delete('/:id', missionaryController.deleteMissionary);
+router.delete('/:id', ensureAuthenticated, missionaryController.deleteMissionary);
 
 module.exports = router;

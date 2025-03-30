@@ -21,6 +21,18 @@ const swaggerOptions = {
       },
   ],
     components: {
+      securitySchemes: {
+        githubAuth: {
+          type: 'oauth2',
+          flows: {
+            authorizationCode: {
+              authorizationUrl: 'https://github.com/login/oauth/authorize',
+              tokenUrl: 'https://github.com/loginoautho/access_token',
+              scopes: { 'user:email': 'Access user email' }
+            }
+          }
+        }
+      },
       schemas: {
         Missionary: {
           type: 'object',
@@ -69,9 +81,38 @@ const swaggerOptions = {
               $ref: '#/components/schemas/Missionary'
             }
           }
+        },
+        AuthStatus: {
+          type: 'object',
+          properties: {
+            isAuthenticated: {
+              type: 'boolean',
+              example: true
+            },
+            user: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                  example: '507f1f77bcf86cd799439011'
+                },
+                username: {
+                  type: 'string',
+                  example: 'GitHubUser',
+                },
+                displayName: {
+                  type: 'string',
+                  example: 'GitHub User'
+                },
+              }
+            }
+          }
         }
       },
     },
+    security: [{
+      githubAuth: ['user:email']
+    }]
   },
   apis: ['./routes/*.js'],
 };
