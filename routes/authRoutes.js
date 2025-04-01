@@ -19,7 +19,12 @@ const passport = require('passport');
  *       302:
  *         description: Redirect to GitHub for authentication
  */
-router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+router.get('/github', (req, res, next) => {
+  console.log('Starting OAuth');
+  passport.authenticate('github', {
+  state: req.query.returnTo || '/'
+})(req, res, next);
+});
 
 /**
  * @swagger
@@ -34,19 +39,23 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
  *         description: Authentication failed
  */
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login', failureFlash: true }),
-  (req, res) => {
-    if (req.headers.accept && req.headers.accept.includes('application/json')) {
-      res.json({
-        message: 'Authentication successful',
-        user: {
-          id: req.user._id,
-          username: req.user.username
+  (req, res, next) => {
+    passport.authenticate('github', (err, user, info) => {
+      if (err) {
+        console.error('OAuth Error:', err);
+        return res.redirect('/?error=oauth_failed');
+      }
+      if (!user) {
+        return res.redirect('/?error=access_denied');
+      }
+      req.logIn(user, (err) => {
+        if (err) {
+          console.error('Session Error:', err);
+          return res.redirect('/?error=session_failed');
         }
+        return res.redirect(req.query.state || '/');
       });
-    } else {
-      res.redirect('/');
-    }
+    })(req, res, next);
   }
 );
 
