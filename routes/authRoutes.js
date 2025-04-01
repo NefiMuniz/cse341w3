@@ -48,6 +48,7 @@ router.get('/github/callback',
         return res.redirect('/?error=oauth_failed');
       }
       if (!user) {
+        console.error('OAuth Error: No user returnerd');
         return res.redirect('/?error=access_denied');
       }
       req.logIn(user, (err) => {
@@ -55,6 +56,9 @@ router.get('/github/callback',
           console.error('Session Error:', err);
           return res.redirect('/?error=session_failed');
         }
+
+        console.log('User logged in successfully:' , user);
+        console.log('Session:', req.session);
         return res.redirect(req.query.state || '/');
       });
     })(req, res, next);

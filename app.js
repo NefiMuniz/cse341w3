@@ -35,10 +35,8 @@ app.use(session({
   proxy: true,
   cookie: {
     secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    httpOnly: true ,
-  maxAge: 24 * 60 * 60 * 1000,
-  domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
   }
 }));
 
@@ -51,6 +49,12 @@ app.use(express.json());
 app.use('/api/missionaries', missionaryRoutes);
 app.use('/api/classes', classRoutes);
 app.use('/auth', authRoutes);
+
+app.use((req, res, next) => {
+  console.log('Session', req.session);
+  console.log('User', req.user);
+  next();
+})
 
 app.get('/', (req, res) => {
   if (req.isAuthenticated()) {
