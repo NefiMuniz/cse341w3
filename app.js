@@ -7,19 +7,38 @@ const authRoutes = require('./routes/authRoutes');
 const swaggerSetup = require('./swagger/swagger');
 const session = require('express-session');
 const passport = require('./config/auth');
-const { ensureAuthenticated } = require('./middleware/auth');
+const cors = require('cors');
 
 const app = express();
 
 // Connect to MongoDB
 connectDB();
 
+app.use(cors({
+  origin: [
+    'https://project-2-iwcv.onrender.com',
+    'http://localhost:3000'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.set('trust proxy', 1);
+
 // Using session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: true, sameSite: 'none', httpOnly: true }
+  proxy: true,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    httpOnly: true ,
+  maxAge: 24 * 60 * 60 * 1000,
+  domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined
+  }
 }));
 
 app.use(passport.initialize());
@@ -38,6 +57,10 @@ app.get('/', (req, res) => {
   } else {
     res.send('Logged out | <a href="/auth/github">Login with GitHub</a> | <a href="/api-docs">API Docs</a>');
   }
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'healthy' });
 });
 
 // Swagger Documentation
