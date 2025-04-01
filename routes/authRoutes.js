@@ -15,6 +15,8 @@ const passport = require('passport');
  *   get:
  *     summary: Initiate GitHub OAuth login
  *     tags: [Authentication]
+ *     security:
+ *       - GitHubOAuth: []
  *     responses:
  *       302:
  *         description: Redirect to GitHub for authentication

@@ -22,7 +22,7 @@ const swaggerOptions = {
   ],
     components: {
       securitySchemes: {
-        githubAuth: {
+        GitHubOAuth: {
           type: 'oauth2',
           flows: {
             authorizationCode: {
@@ -111,7 +111,7 @@ const swaggerOptions = {
       },
     },
     security: [{
-      githubAuth: ['user:email']
+      GitHubOAuth: []
     }]
   },
   apis: ['./routes/*.js'],

@@ -14,7 +14,7 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-app.use(cors({
+/* app.use(cors({
   origin: [
     'https://project-2-iwcv.onrender.com',
     'http://localhost:3000'
@@ -22,7 +22,8 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}));
+})); */
+app.use(cors());
 
 app.set('trust proxy', 1);
 
