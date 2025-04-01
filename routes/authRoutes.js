@@ -34,7 +34,7 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
  *         description: Authentication failed
  */
 router.get('/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
+  passport.authenticate('github', { failureRedirect: '/login', failureFlash: true }),
   (req, res) => {
     if (req.headers.accept && req.headers.accept.includes('application/json')) {
       res.json({
